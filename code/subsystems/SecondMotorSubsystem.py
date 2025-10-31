@@ -20,10 +20,10 @@ class SecondMotorSubsystemClass(commands2.Subsystem):
 
 
     def run(self, speed: float):
-        self.second_motor.set_control(self.request.with_output(speed * 12.0))
-
+        
         if self.is_limit_pressed() and speed > 0:
             speed = 0.0
+        self.second_motor.set_control(self.request.with_output(speed * 12.0))
 
     def go_forward(self):
         self.run(1.0)

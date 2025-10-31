@@ -16,8 +16,13 @@ class FirstMotorSubsystemClass(commands2.Subsystem):
 
         self.first_motor = phoenix6.hardware.TalonFX(ELEC.first_motor_CAN_ID)
         #self.my_motor.setNeutralMode(self.brakemode)
+        self.limit_switch = wpilib.DigitalInput(ELEC.limit_switch_port)
+        self.is_limit_pressed = lambda: self.limit_switch.get()
+        
 
     def go_forward(self):
+        if speed > 0 and self.is_limit_pressed():
+            speed = 0.0
         self.first_motor.set(ELEC.first_motor_forward)
 
     def go_reverse(self):
