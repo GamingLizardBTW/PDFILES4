@@ -27,13 +27,13 @@ MECH = namedtuple("Data", mech_data.keys())(**mech_data)
 # Electrical constants, e.g. current limits, CAN bus IDs, RoboRIO port numbers
 elec_data = {
   ## First motor
-  "first_motor_CAN_ID": 2,
+  "first_motor_CAN_ID": 3,
   "first_motor_forward":1.0,
   "first_motor_reverse":-1.0,
   "first_motor_stop":0.0,
 
   ## Second motor
-  "second_motor_CAN_ID": 3,
+  "second_motor_CAN_ID": 2,
   "second_motor_forward":1.0,
   "second_motor_reverse":-1.0,
   "second_motor_stop":0.0,
