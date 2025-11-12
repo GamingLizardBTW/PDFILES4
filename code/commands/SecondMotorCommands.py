@@ -2,6 +2,7 @@ import logging
 logger = logging.getLogger("secondmotorsubsystemlogger")
 
 import commands2
+import wpilib
 from wpilib import PS5Controller
 from constants import OP  
 from subsystems.SecondMotorSubsystem import SecondMotorSubsystemClass
@@ -23,6 +24,8 @@ class TriggerSpin(commands2.Command):
         right = self.controller.getR2Axis()  # 0.0 → 1.0
         left = self.controller.getL2Axis()   # 0.0 → 1.0
         speed = right - left                  # convert to -1.0 → +1.0
+
+        # Run motor based on trigger position
         self.secondmotorsub.run(speed)
 
     def end(self, interrupted: bool):
@@ -30,5 +33,20 @@ class TriggerSpin(commands2.Command):
         logger.info("TriggerSpin Command Ended")
 
     def isFinished(self):
-        # Never finishes on its own
         return False
+
+
+class DisplayEncoderValue(commands2.Command):
+
+    def __init__(self, secondmotorsubsystem: SecondMotorSubsystemClass):
+        super().__init__()
+        self.secondmotorsub = secondmotorsubsystem
+        self.addRequirements(self.secondmotorsub)
+
+    def initialize(self):
+        # Read encoder and show on SmartDashboard once
+        position = self.secondmotorsub.get_encoder_position()
+        wpilib.SmartDashboard.putNumber("Second Motor Encoder", position)
+
+    def isFinished(self):
+        return True

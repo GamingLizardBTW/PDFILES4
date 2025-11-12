@@ -2,7 +2,7 @@ import logging
 log = logging.Logger('P212-robot')
 
 import commands2
-import phoenix6  
+import phoenix6
 from phoenix6.controls import VoltageOut
 import wpilib
 
@@ -18,10 +18,12 @@ class SecondMotorSubsystemClass(commands2.Subsystem):
         self.limit_switch = wpilib.DigitalInput(ELEC.limit_switch_port)
         self.is_limit_pressed = lambda: self.limit_switch.get()
 
-
     def run(self, speed: float):
-        
-        if speed > 0 and not self.is_limit_pressed():
+        """
+        speed range: -1.0 to +1.0
+        """
+        if speed > 0 and self.is_limit_pressed():
+            # Prevent forward movement
             speed = 0.0
         self.second_motor.set_control(self.request.with_output(speed * 12.0))
 
@@ -33,4 +35,8 @@ class SecondMotorSubsystemClass(commands2.Subsystem):
 
     def stop(self):
         self.run(0.0)
-    
+
+    def get_encoder_position(self) -> float:
+
+        return self.second_motor.getRotorPosition().getValue()
+

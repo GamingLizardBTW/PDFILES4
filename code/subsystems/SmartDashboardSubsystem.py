@@ -9,7 +9,7 @@ import wpimath.trajectory
 from constants import ELEC
 
 
-class SmartDashboardlSubsystemClass(commands2.Subsystem):
+class SmartDashboardSubsystemClass(commands2.Subsystem):
 
     def __init__(self) -> None:
         

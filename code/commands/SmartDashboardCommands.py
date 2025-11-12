@@ -8,12 +8,12 @@ from constants import OP
 
 
 
-from subsystems.SmartDashboardSubsystem import SmartDashboardlSubsystemClass
+from subsystems.SmartDashboardSubsystem import SmartDashboardSubsystemClass
 
 
 class  IncrementNumber(commands2.Command):
 
-    def __init__(self, smartdashboardsubsystem: SmartDashboardlSubsystemClass) -> None:
+    def __init__(self, smartdashboardsubsystem: SmartDashboardSubsystemClass) -> None:
 
         self.smartdashboardsub = smartdashboardsubsystem
         self.addRequirements(self.smartdashboardsub)

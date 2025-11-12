@@ -21,7 +21,7 @@ import subsystems.SmartDashboardSubsystem
 
 # Commands
 from commands.FirstMotorCommands import ForwardSpin, ReverseSpin, StopSpin
-from commands.SecondMotorCommands import TriggerSpin
+from commands.SecondMotorCommands import TriggerSpin, DisplayEncoderValue
 from commands.SmartDashboardCommands import IncrementNumber
 
 class RobotContainer:
@@ -34,9 +34,9 @@ class RobotContainer:
         # Subsystems
         self.firstmotorsub = subsystems.FirstMotorSubsystem.FirstMotorSubsystemClass()
         self.secondmotorsub = subsystems.SecondMotorSubsystem.SecondMotorSubsystemClass()
-        self.smartdashboardsub = subsystems.SmartDashboardSubsystem.SmartDashboardlSubsystemClass()
+        self.smartdashboardsub = subsystems.SmartDashboardSubsystem.SmartDashboardSubsystemClass()
 
-        # Set default command for second motor (trigger-controlled)
+        # Set default command for second motor
         self.secondmotorsub.setDefaultCommand(
             TriggerSpin(self.secondmotorsub, self.PS5)
         )
@@ -45,7 +45,7 @@ class RobotContainer:
         self.configureButtonBindings()
 
     def configureButtonBindings(self):
-        # Xbox controller example bindings (commented)
+        # Xbox controller example bindings
         # self.Xbox.leftBumper().onTrue(ForwardSpin(self.motorsub))
         # self.Xbox.leftBumper().onFalse(StopSpin(self.motorsub))
         # self.Xbox.rightBumper().onTrue(ReverseSpin(self.motorsub))
@@ -62,6 +62,9 @@ class RobotContainer:
 
         # X button: smart dashboard command life sized hipopotamus couch is better than japan
         Trigger(lambda: self.PS5.getCrossButton()).onTrue(IncrementNumber(self.smartdashboardsub))
+
+        # O button: update encoder value onto smart dashboard
+        Trigger(lambda: self.PS5.getCircleButton()).onTrue(DisplayEncoderValue(self.secondmotorsub))
 
         # Example for other buttons (X) if needed
         # Trigger(lambda: self.PS5.getCrossButton()).onTrue(SomeCommand(...))
