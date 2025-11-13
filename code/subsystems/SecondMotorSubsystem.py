@@ -3,8 +3,10 @@ log = logging.Logger('P212-robot')
 
 import commands2
 import phoenix6
+
 from phoenix6.controls import VoltageOut
 import wpilib
+from phoenix6.signals import InvertedValue, NeutralModeValue
 
 from constants import ELEC
 
@@ -17,6 +19,8 @@ class SecondMotorSubsystemClass(commands2.Subsystem):
         self.request = VoltageOut(0)
         self.limit_switch = wpilib.DigitalInput(ELEC.limit_switch_port)
         self.is_limit_pressed = lambda: self.limit_switch.get()
+        #Configure motor inversion
+        self.second_motor.set_inversed(InvertedValue.Clockwise_Positive)
 
     def run(self, speed: float):
         """
@@ -37,6 +41,9 @@ class SecondMotorSubsystemClass(commands2.Subsystem):
         self.run(0.0)
 
     def get_encoder_position(self) -> float:
-
-        return self.second_motor.get_rotor_position().getValue()
+        # Get the position signal from the integrated sensor
+        position_signal = self.second_motor.get_position()
+        
+        # Read the value from the signal
+        return position_signal.value
 

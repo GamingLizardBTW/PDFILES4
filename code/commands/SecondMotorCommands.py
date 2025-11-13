@@ -47,6 +47,7 @@ class DisplayEncoderValue(commands2.Command):
         # Read encoder and show on SmartDashboard once
         position = self.secondmotorsub.get_encoder_position()
         wpilib.SmartDashboard.putNumber("Second Motor Encoder", position)
+        logger.info("Encoder Command initialized")
 
     def isFinished(self):
         return True
