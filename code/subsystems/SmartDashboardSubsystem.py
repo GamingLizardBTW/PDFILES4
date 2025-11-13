@@ -5,7 +5,7 @@ import commands2
 import phoenix6
 import wpimath.controller
 import wpimath.trajectory
-
+from wpilib import SmartDashboard
 from constants import ELEC
 
 
@@ -13,7 +13,10 @@ class SmartDashboardSubsystemClass(commands2.Subsystem):
 
     def __init__(self) -> None:
         
-        #self.get_number = lambda: self.stored_number()
+        super().__init__()
+        self.setName("SmartDashboardSubsystem")
+
+        
         self.stored_number = 0
         
 

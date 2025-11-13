@@ -14,7 +14,7 @@ from subsystems.SmartDashboardSubsystem import SmartDashboardSubsystemClass
 class  IncrementNumber(commands2.Command):
 
     def __init__(self, smartdashboardsubsystem: SmartDashboardSubsystemClass) -> None:
-
+        super().__init__()
         self.smartdashboardsub = smartdashboardsubsystem
         self.addRequirements(self.smartdashboardsub)
 
@@ -30,7 +30,3 @@ class  IncrementNumber(commands2.Command):
     def isFinished(self):
 
         return True
-
-    #def end(self, interrupted: bool):
-
-        #self.motorsub.stop()
