@@ -26,7 +26,7 @@ class SecondMotorSubsystemClass(commands2.Subsystem):
         config = configs.TalonFXConfiguration()
 
         # Sensor-to-mechanism ratio
-        config.feedback.sensor_to_mechanism_ratio = SW.Second_Gear_Ratio
+        #config.feedback.sensor_to_mechanism_ratio = SW.Second_Gear_Ratio
 
         # Motion Magic parameters
         config.motion_magic.motion_magic_cruise_velocity = SW.Second_Cruise_Velocity
