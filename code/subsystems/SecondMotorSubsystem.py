@@ -66,7 +66,8 @@ class SecondMotorSubsystemClass(commands2.Subsystem):
 
         rotations = self.second_motor.get_rotor_position().value
         degrees = rotations * 360.0
-        return degrees % 360.0
+        wrapped = degrees % 360.0
+        return wrapped
     
     def go_to_position(self, target_rotations: float):
 
@@ -74,12 +75,22 @@ class SecondMotorSubsystemClass(commands2.Subsystem):
 
 
     def periodic(self):
+        #Rotations
         position = self.second_motor.get_rotor_position().value
-        setpoint = self.second_motor.get_differential_closed_loop_reference().value
+
+        #Position in degrees
+        rotations = self.second_motor.get_rotor_position().value
+        degrees = rotations * 360.0
+        wrapped = degrees % 360.0
+
+        #Where it is trying to go
+        #setpoint = self.second_motor.get_differential_closed_loop_reference().value
+
+        #speed
         velocity = self.second_motor.get_velocity().value
 
         wpilib.SmartDashboard.putNumber("SecondMotor Rotations", position)
-        wpilib.SmartDashboard.putNumber("SecondMotor Position Degrees", position * 360)
-        wpilib.SmartDashboard.putNumber("SecondMotor Setpoint", setpoint)
+        wpilib.SmartDashboard.putNumber("SecondMotor Position Degrees", wrapped)
+        #wpilib.SmartDashboard.putNumber("SecondMotor Setpoint", setpoint)
         wpilib.SmartDashboard.putNumber("SecondMotor Velocity", velocity)
         wpilib.SmartDashboard.putBoolean("SecondMotor Limit Switch", self.is_limit_pressed())
