@@ -69,9 +69,9 @@ class SecondMotorSubsystemClass(commands2.Subsystem):
         wrapped = degrees % 360.0
         return wrapped
     
-    def go_to_position(self, target_rotations: float):
+    def secondmotorPID(self, target):
 
-        self.second_motor.set_control(self.motion_magic.with_position(target_rotations).with_slot(0))
+        self.second_motor.set_control(self.motion_magic.with_position(target).with_slot(0))
 
 
     def periodic(self):

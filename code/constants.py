@@ -64,9 +64,11 @@ sw_data = {
     "Second_Acceleration": 54,       # rotations/s^2
     "Second_Jerk": 500,              # rotations/s^3
 
-    "Second_Gear_Ratio": 1.0,        # update if needed
+    #"Second_Gear_Ratio": 1.0,        # update if needed
 
     "Second_Tolerance": 0.15,
     "Second_Speed_Tolerance": 0.2,
+
+    "FirstSecondMotorSetpoint": 4.0,
 }
 SW = namedtuple("Data", sw_data.keys())(**sw_data)

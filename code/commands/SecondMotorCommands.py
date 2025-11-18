@@ -4,7 +4,7 @@ logger = logging.getLogger("secondmotorsubsystemlogger")
 import commands2
 import wpilib
 from wpilib import PS5Controller
-from constants import OP  
+from constants import OP, SW
 from subsystems.SecondMotorSubsystem import SecondMotorSubsystemClass
 
 
@@ -52,15 +52,21 @@ class DisplayEncoderValue(commands2.Command):
 
 class MoveToPosition(commands2.Command):
 
-    def __init__(self, secondmotorsubsystem: SecondMotorSubsystemClass, target_rotations: float):
-        super().__init__()
+    def __init__(self, secondmotorsubsystem: SecondMotorSubsystemClass) -> None:
         self.secondmotorsub = secondmotorsubsystem
-        self.target = target_rotations
         self.addRequirements(self.secondmotorsub)
 
     def initialize(self):
         logger.info("MoveToPosition Command Initialized")
-        self.secondmotorsub.go_to_position(self.target)
+        
+
+    def execute(self):
+        self.secondmotorsub.secondmotorPID(SW.FirstSecondMotorSetpoint)
 
     def isFinished(self):
-        return True
+        return False
+    
+    def end(self, interrupted):
+        logger.info("MoveToPosition Command ended")
+        print("Motion Magic Preset 1 Ended")
+        self.secondmotorsub.stop()
