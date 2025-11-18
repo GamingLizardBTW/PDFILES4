@@ -21,7 +21,7 @@ import subsystems.SmartDashboardSubsystem
 
 # Commands
 from commands.FirstMotorCommands import ForwardSpin, ReverseSpin, StopSpin
-from commands.SecondMotorCommands import TriggerSpin, DisplayEncoderValue
+from commands.SecondMotorCommands import TriggerSpin, DisplayEncoderValue, MoveToPosition
 from commands.SmartDashboardCommands import IncrementNumber
 
 class RobotContainer:
@@ -63,8 +63,11 @@ class RobotContainer:
         # X button: smart dashboard command life sized hipopotamus couch is better than japan
         Trigger(lambda: self.PS5.getCrossButton()).onTrue(IncrementNumber(self.smartdashboardsub))
 
-        # O button: update encoder value onto smart dashboard
+        # O button: update second motor encoder value onto smart dashboard
         Trigger(lambda: self.PS5.getCircleButton()).onTrue(DisplayEncoderValue(self.secondmotorsub))
+
+        # Square button: PID for second motor
+        Trigger(lambda: self.PS5.getSquareButton()).onTrue(MoveToPosition(self.secondmotorsub))
 
         # Example for other buttons (X) if needed
         # Trigger(lambda: self.PS5.getCrossButton()).onTrue(SomeCommand(...))

@@ -20,12 +20,9 @@ class TriggerSpin(commands2.Command):
         logger.info("TriggerSpin Command Initialized")
 
     def execute(self):
-        # Read PS5 triggers
         right = self.controller.getR2Axis()  # 0.0 → 1.0
         left = self.controller.getL2Axis()   # 0.0 → 1.0
-        speed = right - left                  # convert to -1.0 → +1.0
-
-        # Run motor based on trigger position
+        speed = right - left                  # -1.0 → +1.0
         self.secondmotorsub.run(speed)
 
     def end(self, interrupted: bool):
@@ -44,15 +41,26 @@ class DisplayEncoderValue(commands2.Command):
         self.addRequirements(self.secondmotorsub)
 
     def initialize(self):
-        # Read encoder wrapped degrees
         wrapped_degrees = self.secondmotorsub.get_encoder_position()
-
-        # Raw rotations 
         raw_rotations = self.secondmotorsub.second_motor.get_rotor_position().value
-
-        # Send both values to SmartDashboard
         wpilib.SmartDashboard.putNumber("Encoder Degrees (Wrapped)", wrapped_degrees)
         wpilib.SmartDashboard.putNumber("Encoder Rotations (Raw)", raw_rotations)
 
     def isFinished(self):
         return True
+
+
+class MoveToPosition(commands2.Command):
+
+    def __init__(self, secondmotorsubsystem: SecondMotorSubsystemClass, target_rotations: float):
+        super().__init__()
+        self.secondmotorsub = secondmotorsubsystem
+        self.target = target_rotations
+        self.addRequirements(self.secondmotorsub)
+
+    def initialize(self):
+        logger.info("MoveToPosition Command Initialized")
+        self.secondmotorsub.go_to_position(self.target)
+
+    def isFinished(self):
+         return True
