@@ -73,8 +73,8 @@ class FirstMotorSubsystemClass(commands2.Subsystem):
         #speed
         velocity = self.first_motor.get_velocity().value
 
-        wpilib.SmartDashboard.putNumber("SecondMotor Rotations", position)
-        wpilib.SmartDashboard.putNumber("SecondMotor Position Degrees", wrapped)
+        wpilib.SmartDashboard.putNumber("First Rotations", position)
+        wpilib.SmartDashboard.putNumber("First Position Degrees", wrapped)
         #wpilib.SmartDashboard.putNumber("SecondMotor Setpoint", setpoint)
-        wpilib.SmartDashboard.putNumber("SecondMotor Velocity", velocity)
+        wpilib.SmartDashboard.putNumber("First Velocity", velocity)
         #wpilib.SmartDashboard.putBoolean("SecondMotor Limit Switch", self.is_limit_pressed())
