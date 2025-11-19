@@ -53,21 +53,21 @@ OP = namedtuple("Data", op_data.keys())(**op_data)
 # Software constants, e.g. PID values, absolute encoder zero points
 sw_data = {
 # SecondMotor PID Constats
-    "Second_ks": 3,
-    "Second_kv": 0.12,
+    "Second_ks": 0,
+    "Second_kv": 0,
     "Second_ka": 0,
-    "Second_kp": 45,
-    "Second_ki": 0.01,
-    "Second_kd": 0.01,
+    "Second_kp": 0.1,
+    "Second_ki": 0,
+    "Second_kd": 0,
 
-    "Second_Cruise_Velocity": 5,    # rotations/second
-    "Second_Acceleration": 2,       # rotations/s^2
-    "Second_Jerk": 500,              # rotations/s^3
+    "Second_Cruise_Velocity": 0,    # rotations/second
+    "Second_Acceleration": 0,       # rotations/s^2
+    "Second_Jerk": 0,              # rotations/s^3
 
     #"Second_Gear_Ratio": 1.0,        # update if needed
 
-    "Second_Tolerance": 0.15,
-    "Second_Speed_Tolerance": 0.2,
+    "Second_Tolerance": 0,
+    "Second_Speed_Tolerance": 0,
 
     "FirstMotorSetpoint": 50.0,
 }
