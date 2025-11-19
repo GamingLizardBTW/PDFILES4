@@ -15,6 +15,7 @@ class TriggerSpin(commands2.Command):
         self.secondmotorsub = secondmotorsubsystem
         self.controller = controller
         self.addRequirements(self.secondmotorsub)
+        
 
     def initialize(self):
         logger.info("TriggerSpin Command Initialized")
@@ -50,23 +51,4 @@ class DisplayEncoderValue(commands2.Command):
         return True
 
 
-class MoveToPosition(commands2.Command):
 
-    def __init__(self, secondmotorsubsystem: SecondMotorSubsystemClass) -> None:
-        self.secondmotorsub = secondmotorsubsystem
-        self.addRequirements(self.secondmotorsub)
-
-    def initialize(self):
-        logger.info("MoveToPosition Command Initialized")
-        
-
-    def execute(self):
-        self.secondmotorsub.secondmotorPID(SW.FirstSecondMotorSetpoint)
-
-    def isFinished(self):
-        return False
-    
-    def end(self, interrupted):
-        logger.info("MoveToPosition Command ended")
-        print("Motion Magic Preset 1 Ended")
-        self.secondmotorsub.stop()

@@ -12,7 +12,7 @@ from commands2.button import Trigger
 from constants import OP
 #from wpilib import XboxController
 from wpilib import PS5Controller
-from constants import ELEC
+from constants import ELEC, SW
 
 # Subsystems
 import subsystems.FirstMotorSubsystem
@@ -20,8 +20,8 @@ import subsystems.SecondMotorSubsystem
 import subsystems.SmartDashboardSubsystem
 
 # Commands
-from commands.FirstMotorCommands import ForwardSpin, ReverseSpin, StopSpin
-from commands.SecondMotorCommands import TriggerSpin, DisplayEncoderValue, MoveToPosition
+from commands.FirstMotorCommands import ForwardSpin, ReverseSpin, StopSpin, MoveToPosition
+from commands.SecondMotorCommands import TriggerSpin, DisplayEncoderValue
 from commands.SmartDashboardCommands import IncrementNumber
 
 class RobotContainer:
@@ -66,8 +66,8 @@ class RobotContainer:
         # O button: update second motor encoder value onto smart dashboard
         Trigger(lambda: self.PS5.getCircleButton()).onTrue(DisplayEncoderValue(self.secondmotorsub))
 
-        # Square button: Move second motor to rotation with PID
-        Trigger(lambda: self.PS5.getSquareButton()).whileTrue(MoveToPosition(self.secondmotorsub))
+        # Square button: Move first motor to rotation with PID
+        Trigger(lambda: self.PS5.getSquareButton()).whileTrue(MoveToPosition(self.firstmotorsub))
 
         
 

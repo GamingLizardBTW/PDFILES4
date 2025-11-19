@@ -5,7 +5,7 @@ logger = logging.getLogger("firstmotorsubsystemlogger")
 
 import commands2
 import constants
-from constants import OP
+from constants import OP, SW
 
 
 
@@ -86,3 +86,24 @@ class  StopSpin(commands2.Command):
     #def end(self, interrupted: bool):
 
         #self.motorsub.stop()
+
+class MoveToPosition(commands2.Command):
+
+    def __init__(self, firstmotorsubsytem: FirstMotorSubsystemClass) -> None:
+        self.firstmotorsubs = firstmotorsubsytem
+        self.addRequirements(self.firstmotorsubs)
+
+    def initialize(self):
+        logger.info("MoveToPosition Command Initialized")
+        
+
+    def execute(self):
+        self.firstmotorsubs.firstmotorPID(SW.FirstMotorSetpoint)
+
+    def isFinished(self):
+        return False
+    
+    def end(self, interrupted):
+        logger.info("MoveToPosition Command ended")
+        print("Motion Magic Preset 1 Ended")
+        self.firstmotorsubs.stop()
