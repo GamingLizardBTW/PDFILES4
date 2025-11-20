@@ -184,3 +184,6 @@ robot/.deploy_cfg
 
 
 robot/git-modified-files.txt
+
+
+ctre_sim/

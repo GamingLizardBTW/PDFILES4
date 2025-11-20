@@ -52,23 +52,22 @@ OP = namedtuple("Data", op_data.keys())(**op_data)
 
 # Software constants, e.g. PID values, absolute encoder zero points
 sw_data = {
-# SecondMotor PID Constats
-    "Second_ks": 0,
-    "Second_kv": 0,
-    "Second_ka": 0,
-    "Second_kp": 0.1,
-    "Second_ki": 0,
-    "Second_kd": 0,
+    "First_ks": 0.2,     # Static friction
+    "First_kv": 0.12,    # Velocity feedforward
+    "First_ka": 0.0,     # Acceleration feedforward raise if system needs to be faster
 
-    "Second_Cruise_Velocity": 0,    # rotations/second
-    "Second_Acceleration": 0,       # rotations/s^2
-    "Second_Jerk": 0,              # rotations/s^3
+    "First_kp": 3.0,     # Too high and will cause oscillation, too low will make it not reach desired place
+    "First_ki": 0.0,     # Helps fix small errors over time 
+    "First_kd": 0.1,     # Stabalizing, fixes over shoot
 
-    #"Second_Gear_Ratio": 1.0,        # update if needed
+    # Motion Magic
+    "First_Cruise_Velocity": 40,   # rotations/sec   Max Speed
+    "First_Acceleration": 80,      # rotations/sec^2 How fast it can accelerate
+    "First_Jerk": 0,               # optional        First push to start acceleration
 
-    "Second_Tolerance": 0,
-    "Second_Speed_Tolerance": 0,
+    "First_Gear_Ratio": 1.0,       #change if motor has gearing
 
-    "FirstMotorSetpoint": 50.0,
+    # Setpoint for testing
+    "FirstMotorSetpoint": 5.0,     #rotations
 }
 SW = namedtuple("Data", sw_data.keys())(**sw_data)

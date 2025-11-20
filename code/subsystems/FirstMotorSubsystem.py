@@ -24,23 +24,22 @@ class FirstMotorSubsystemClass(commands2.Subsystem):
         self.motion_magic = MotionMagicVoltage(0)
         config = configs.TalonFXConfiguration()
 
-        # Sensor-to-mechanism ratio
-        #config.feedback.sensor_to_mechanism_ratio = SW.Second_Gear_Ratio
+        # Gear ratio
+        config.feedback.sensor_to_mechanism_ratio = SW.First_Gear_Ratio
 
         # Motion Magic parameters
-        config.motion_magic.motion_magic_cruise_velocity = SW.Second_Cruise_Velocity
-        config.motion_magic.motion_magic_acceleration = SW.Second_Acceleration
-        config.motion_magic.motion_magic_jerk = SW.Second_Jerk
+        config.motion_magic.motion_magic_cruise_velocity = SW.First_Cruise_Velocity
+        config.motion_magic.motion_magic_acceleration = SW.First_Acceleration
+        config.motion_magic.motion_magic_jerk = SW.First_Jerk
 
         slot0 = config.slot0
-        slot0.k_s = SW.Second_ks
-        slot0.k_v = SW.Second_kv
-        slot0.k_a = SW.Second_ka
-        slot0.k_p = SW.Second_kp
-        slot0.k_i = SW.Second_ki
-        slot0.k_d = SW.Second_kd
+        slot0.k_s = SW.First_ks
+        slot0.k_v = SW.First_kv
+        slot0.k_a = SW.First_ka
+        slot0.k_p = SW.First_kp
+        slot0.k_i = SW.First_ki
+        slot0.k_d = SW.First_kd
 
-        self.first_motor.configurator.apply(config)
         
 
     def go_forward(self):

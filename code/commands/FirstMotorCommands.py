@@ -24,18 +24,11 @@ class  ForwardSpin(commands2.Command):
         self.firstmotorsub.go_forward()
         logger.info("Forward Command Initialized")  
 
-    #def execute(self):
-        
-        #self.motorsub.go_forward
-        #logger.info("Forward Command Running")
 
     def isFinished(self):
 
         return True
 
-    #def end(self, interrupted: bool):
-
-        #self.motorsub.stop()
 
 class  ReverseSpin(commands2.Command):
 
@@ -49,18 +42,11 @@ class  ReverseSpin(commands2.Command):
         self.firstmotorsub.go_reverse()
         logger.info("Reverse Command Initialized")
 
-    #def execute(self):
-
-        #self.motorsub.go_reverse
-        #logger.info("Reverse Command Initialized")
 
     def isFinished(self):
 
         return True
 
-    #def end(self, interrupted: bool):
-
-        #self.motorsub.stop()
 
 class  StopSpin(commands2.Command):
 
@@ -73,9 +59,6 @@ class  StopSpin(commands2.Command):
         self.firstmotorsub.stop()
         logger.info("Stop Command Initialized")
 
-    #def execute(self):
-        #self.motorsub.stop
-        #logger.info("Stop Command Running")
 
 
 
@@ -83,27 +66,19 @@ class  StopSpin(commands2.Command):
 
         return True
 
-    #def end(self, interrupted: bool):
-
-        #self.motorsub.stop()
 
 class MoveToPosition(commands2.Command):
 
-    def __init__(self, firstmotorsubsytem: FirstMotorSubsystemClass) -> None:
-        self.firstmotorsubs = firstmotorsubsytem
-        self.addRequirements(self.firstmotorsubs)
+    def __init__(self, firstmotorsubsystem: FirstMotorSubsystemClass) -> None:
+        self.firstmotorsub = firstmotorsubsystem
+        self.addRequirements(self.firstmotorsub)
 
     def initialize(self):
         logger.info("MoveToPosition Command Initialized")
-        
-
-    def execute(self):
-        self.firstmotorsubs.firstmotorPID(SW.FirstMotorSetpoint)
+        self.firstmotorsub.firstmotorPID(SW.FirstMotorSetpoint)
 
     def isFinished(self):
-        return False
-    
+        return True
+
     def end(self, interrupted):
         logger.info("MoveToPosition Command ended")
-        print("Motion Magic Preset 1 Ended")
-        self.firstmotorsubs.stop()
