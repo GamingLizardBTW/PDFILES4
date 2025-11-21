@@ -67,13 +67,13 @@ class FirstMotorSubsystemClass(commands2.Subsystem):
         wrapped = degrees % 360.0
 
         #Where it is trying to go
-        #setpoint = self.second_motor.get_differential_closed_loop_reference().value
+        setpoint = self.second_motor.get_differential_closed_loop_reference().value
 
         #speed
         velocity = self.first_motor.get_velocity().value
 
         wpilib.SmartDashboard.putNumber("First Rotations", rotations)
         wpilib.SmartDashboard.putNumber("First Position Degrees", wrapped)
-        #wpilib.SmartDashboard.putNumber("SecondMotor Setpoint", setpoint)
+        wpilib.SmartDashboard.putNumber("SecondMotor Setpoint", setpoint)
         wpilib.SmartDashboard.putNumber("First Velocity", velocity)
         #wpilib.SmartDashboard.putBoolean("SecondMotor Limit Switch", self.is_limit_pressed())
