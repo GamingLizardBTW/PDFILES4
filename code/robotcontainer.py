@@ -72,7 +72,7 @@ class RobotContainer:
         
 
         # Example for other buttons (X) if needed
-        # Trigger(lambda: self.PS5.getCrossButton()).onTrue(SomeCommand(...))
+        # Trigger(lambda: self.PS5.getCrossButton()).onTrue(Command(self.sub))
 
     def all_subsystems(self):
         """

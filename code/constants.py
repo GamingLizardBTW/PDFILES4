@@ -52,6 +52,7 @@ OP = namedtuple("Data", op_data.keys())(**op_data)
 
 # Software constants, e.g. PID values, absolute encoder zero points
 sw_data = {
+    #First motor PID
     "First_ks": 0.2,     # Static friction
     "First_kv": 0.12,    # Velocity feedforward
     "First_ka": 0.0,     # Acceleration feedforward raise if system needs to be faster
@@ -68,6 +69,6 @@ sw_data = {
     "First_Gear_Ratio": 1.0,       #change if motor has gearing
 
     # Setpoint for testing
-    "FirstMotorSetpoint": 5.0,     #rotations
+    "FirstMotorSetpoint": 10.0,     #number of rotations to move to
 }
 SW = namedtuple("Data", sw_data.keys())(**sw_data)
